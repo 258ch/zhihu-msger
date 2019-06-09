@@ -22,11 +22,9 @@ function sendMsg(uid, co, cookie) {
     var res = request('POST', url, {json: postData, headers : {Cookie: cookie}})
     if(res.statusCode == 200)
         return [1, '']
-    else {
-        var resStr = res.body.toString()
-        var j = JSON.parse(resStr)
-        return [0, j.error.message]
-    }
+    else
+        return [0, res.statusCode]
+
 }
 
 function main() {
