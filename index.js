@@ -6,10 +6,16 @@ var config = JSON.parse(fs.readFileSync('config.json', 'utf-8'))
 // z_c0=".+?"
 var cookie = fs.readFileSync('cookie', 'utf-8').trim()
 
-function sleepWithPrint(second) {
-    for(var i = 0; i < second; i++) {
+function sleepWithPrint(seconds, duration=60) {
+    var times = Math.trunc(seconds / duration)
+    var remain = seconds % duration
+    for(var i = 0; i < times; i++) {
         console.log(`Sleep: ${i}`)
-        sleep.sleep(1)
+        sleep.sleep(duration)
+    }
+    if(remain != 0) {
+        console.log(`Sleep: ${times}`)
+        sleep.sleep(remain)
     }
 }
 
