@@ -6,6 +6,13 @@ var config = JSON.parse(fs.readFileSync('config.json', 'utf-8'))
 // z_c0=".+?"
 var cookie = fs.readFileSync('cookie', 'utf-8').trim()
 
+function sleepWithPrint(second) {
+    for(var i = 0; i < second; i++) {
+        console.log(`Sleep: ${i}`)
+        sleep.sleep(1)
+    }
+}
+
 function getUsersId(tid, start, num) {
     
     var url = `https://www.zhihu.com/api/v4/topics/${tid}/followers?limit=${num}&offset=${start}`
@@ -43,7 +50,7 @@ function main() {
             console.log(`${uid} 发送失败：${res[1]}`)
         
         if(res[1] == 403)
-            sleep.sleep(config._403_wait_sec)
+            sleepWithPrint(config._403_wait_sec)
         else
             sleep.sleep(config.wait_sec)
     }
