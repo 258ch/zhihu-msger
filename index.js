@@ -42,7 +42,10 @@ function main() {
         else
             console.log(`${uid} 发送失败：${res[1]}`)
         
-        sleep.sleep(config.wait_sec)
+        if(res[1] == 403)
+            sleep.sleep(config._403_wait_sec)
+        else
+            sleep.sleep(config.wait_sec)
     }
 }
 
